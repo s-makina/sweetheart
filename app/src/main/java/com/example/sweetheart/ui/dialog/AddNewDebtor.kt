@@ -20,20 +20,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.sweetheart.ui.events.OrdersEvent
-import com.example.sweetheart.ui.viewmodel.OrdersViewModel
 
 @Composable
-fun AddNewOrder(showDialog: MutableState<Boolean>, ordersViewModel: OrdersViewModel) {
-    val state = ordersViewModel.state
-
+fun AddNewDebtor(showDialog: MutableState<Boolean>) {
     if (showDialog.value) {
-        Dialog(onDismissRequest = { }) {
+        Dialog(onDismissRequest = { /*TODO*/ }) {
             Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(8.dp)) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "New Order",
+                            text = "New Debtor",
                             style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier
                                 .weight(1f)
@@ -48,38 +44,43 @@ fun AddNewOrder(showDialog: MutableState<Boolean>, ordersViewModel: OrdersViewMo
                         .padding(horizontal = 8.dp)
 
                     OutlinedTextField(
-                        value = state.productName,
-                        onValueChange = { ordersViewModel.event(OrdersEvent.OnProductNameChange(it)) },
+                        value = "",
+                        onValueChange = {},
                         label = {
-                            Text(text = "What are you ordering?")
+                            Text(text = "Full Name")
                         },
-                        modifier = modifier,
-                        isError = state.productNameError != null
+                        modifier = modifier
+                    )
+                    OutlinedTextField(
+                        value = "",
+                        onValueChange = {},
+                        label = {
+                            Text(text = "What do they want to take?")
+                        },
+                        modifier = modifier
                     )
 
                     OutlinedTextField(
-                        value = state.amount,
-                        onValueChange = { ordersViewModel.event(OrdersEvent.OnAmountChange(it)) },
+                        value = "",
+                        onValueChange = {},
                         label = {
-                            Text(text = "How much?")
+                            Text(text = "For how much?")
                         },
-                        modifier = modifier,
-                        isError = state.amountError != null
+                        modifier = modifier
                     )
 
                     OutlinedTextField(
-                        value = state.location,
-                        onValueChange = { ordersViewModel.event(OrdersEvent.OnOrderLocationChange(it)) },
+                        value = "",
+                        onValueChange = {},
                         label = {
-                            Text(text = "Where are you ordering?")
+                            Text(text = "When are they going pay back")
                         },
-                        modifier = modifier,
-                        isError = state.locationError != null
+                        modifier = modifier
                     )
 
                     OutlinedTextField(
-                        value = state.description,
-                        onValueChange = { ordersViewModel.event(OrdersEvent.OnDescriptionChange(it)) },
+                        value = "",
+                        onValueChange = {},
                         label = { Text(text = "Description") },
                         minLines = 3,
                         maxLines = 4,
@@ -87,10 +88,7 @@ fun AddNewOrder(showDialog: MutableState<Boolean>, ordersViewModel: OrdersViewMo
                     )
 
                     Button(
-                        onClick = {
-                            ordersViewModel.event(OrdersEvent.OnSubmit)
-                            showDialog.value = false
-                        }, modifier = Modifier
+                        onClick = { /*TODO*/ }, modifier = Modifier
                             .padding(8.dp)
                             .align(Alignment.End)
                     ) {

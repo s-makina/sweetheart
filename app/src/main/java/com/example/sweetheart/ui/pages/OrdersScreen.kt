@@ -18,42 +18,54 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.sweetheart.data.model.Order
 import com.example.sweetheart.ui.component.ListContainer
 import com.example.sweetheart.ui.dialog.AddNewOrder
+import com.example.sweetheart.ui.events.OrdersEvent
+import com.example.sweetheart.ui.viewmodel.OrdersViewModel
 
 @Composable
 fun OrdersScreen() {
+    val ordersViewModel: OrdersViewModel = hiltViewModel()
+    val state = ordersViewModel.state
+
     val addDialog = remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = true) {
+        ordersViewModel.event(OrdersEvent.OnLoad)
+    }
 
     Scaffold(
         modifier = Modifier,
         floatingActionButton = {
-            FloatingActionButton(onClick = { addDialog.value = true}) {
+            FloatingActionButton(onClick = { addDialog.value = true }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
         }
     ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
             ListContainer(modifier = Modifier.padding(horizontal = 8.dp)) {
-                items(10) {
-                    OrderCard()
+                items(state.list) { order ->
+                    OrderCard(order)
                 }
-                item{
+
+                item {
                     Spacer(modifier = Modifier.height(70.dp))
                 }
             }
         }
     }
-    AddNewOrder(addDialog)
+    AddNewOrder(addDialog, ordersViewModel)
 }
 
 @Composable
-fun OrderCard() {
+fun OrderCard(order: Order) {
     Card(modifier = Modifier.padding(bottom = 8.dp)) {
         Row(
             modifier = Modifier
@@ -64,8 +76,8 @@ fun OrderCard() {
             Column(
                 modifier = Modifier.weight(1f),
             ) {
-                Text(text = "Orders", style = MaterialTheme.typography.titleMedium)
-                Text(text = "Blantyre", style = MaterialTheme.typography.bodyMedium)
+                Text(text = order.productName, style = MaterialTheme.typography.titleMedium)
+                Text(text = order.location, style = MaterialTheme.typography.bodyMedium)
                 Text(
                     text = "07 Apr 2023",
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
@@ -73,7 +85,7 @@ fun OrderCard() {
                 )
             }
 
-            IconButton(onClick = {  }) {
+            IconButton(onClick = { }) {
                 Icon(imageVector = Icons.Default.Edit, contentDescription = null)
             }
         }

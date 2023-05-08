@@ -7,8 +7,9 @@ import org.mongodb.kbson.ObjectId
 
 class OrderEntity: RealmObject {
     var _id: ObjectId = ObjectId()
-    var supplier: RealmList<SupplerEntity> = realmListOf()
-    var amount: Int = 0
+    var productName: String = ""
+    var location: String = ""
+    var amount: Double = 0.0
     var date: Long = System.currentTimeMillis()
     var description: String? = null
 }
