@@ -1,4 +1,4 @@
-package com.sps.auctionmobileapp.ui.componets
+package com.example.sweetheart.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,8 +7,8 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.sps.auctionmobileapp.util.Resource
-import com.sps.auctionmobileapp.util.Status
+import com.example.sweetheart.util.Resource
+import com.example.sweetheart.util.Status
 
 @Composable
 fun ListContainer(

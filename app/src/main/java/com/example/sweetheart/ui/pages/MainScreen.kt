@@ -48,6 +48,10 @@ fun MainScreen() {
             composable(Screen.Sales.route) {
                 SalesScreen()
             }
+
+            composable(Screen.Orders.route) {
+                OrdersScreen()
+            }
         }
     }
 }
@@ -59,7 +63,7 @@ fun BottomNav(bottomNavController: NavHostController) {
         NavItem(R.drawable.ic_dash, title = "Dashboard", Screen.Dashboard),
         NavItem(R.drawable.ic_shopping, title = "Sales", Screen.Sales),
         NavItem(R.drawable.ic_debtors, title = "Debtors", Screen.Debtors),
-        NavItem(R.drawable.ic_orders, title = "Orders", Screen.Debtors),
+        NavItem(R.drawable.ic_orders, title = "Orders", Screen.Orders),
     )
 
     NavigationBar {

@@ -1,8 +1,6 @@
-package com.sps.auctionmobileapp.ui.componets
+package com.example.sweetheart.ui.component
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -17,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.sps.auctionmobileapp.ui.theme.onBlue
 
 @Composable
 fun SegmentedButton(itemsList: List<String>, defaultIndex: Int = 0, onSelect: (Int) -> Unit) {
