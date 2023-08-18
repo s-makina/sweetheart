@@ -10,5 +10,7 @@ data class OrdersUiState(
     val amountError: String? = null,
     val location: String = "",
     val locationError: String? = null,
-    val description: String = ""
+    val description: String = "",
+    val orderDate: Long? = null,
+    val orderDateError: String? = null
 )

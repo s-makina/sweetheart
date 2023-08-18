@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.sweetheart.data.model.Order
+import com.example.sweetheart.ui.component.DatePickerComponent
 import com.example.sweetheart.ui.component.ListContainer
 import com.example.sweetheart.ui.dialog.AddNewOrder
 import com.example.sweetheart.ui.events.OrdersEvent
@@ -60,6 +61,7 @@ fun OrdersScreen() {
                 }
             }
         }
+
     }
     AddNewOrder(addDialog, ordersViewModel)
 }

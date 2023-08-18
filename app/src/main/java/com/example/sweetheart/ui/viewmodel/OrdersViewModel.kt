@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sweetheart.Helper.log
 import com.example.sweetheart.data.repo.OrdersRepo
 import com.example.sweetheart.ui.events.OrdersEvent
 import com.example.sweetheart.ui.presentation.OrdersUiState
@@ -43,6 +44,9 @@ class OrdersViewModel @Inject constructor(
             is OrdersEvent.OnLoad -> {
                 getOrders()
             }
+            is OrdersEvent.OnDateChange -> {
+                state = state.copy(orderDate = event.date)
+            }
         }
     }
 
@@ -58,28 +62,34 @@ class OrdersViewModel @Inject constructor(
         val productNameResult = validator.validateRequired.execute(state.productName)
         val locationNameResult = validator.validateRequired.execute(state.location)
         val amountResult = validator.validateRequired.execute(state.amount)
+        val dateResult = validator.dateValidator.execute(state.orderDate)
 
         val hasErrors = listOf(
             productNameResult,
             locationNameResult,
             amountResult,
+            dateResult
         ).any { !it.successful }
 
         state = state.copy(
             productNameError = productNameResult.errorMessage,
             locationError = locationNameResult.errorMessage,
-            amountError = amountResult.errorMessage
+            amountError = amountResult.errorMessage,
+            orderDateError = dateResult.errorMessage
         )
+        log("Result: "+hasErrors)
         return hasErrors
     }
 
     private fun saveOrder() {
+
         viewModelScope.launch(Dispatchers.IO) {
             if (validate()) return@launch
             ordersRepo.addNew(
                 state.productName,
                 state.location,
                 state.amount,
+                state.orderDate ?: 0L,
                 state.description
             )
         }

@@ -8,4 +8,5 @@ class Validators {
     val validatePassword = ValidatePassword()
     val validatePhone = ValidatePhone()
     val validateRequired = ValidateRequired()
+    val dateValidator = ValidateDate()
 }

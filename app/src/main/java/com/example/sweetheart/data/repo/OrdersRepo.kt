@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 
 class OrdersRepo(private val realm: Realm) {
 
-    suspend fun addNew(productName: String, location: String, amount: String, description: String) {
+    suspend fun addNew(productName: String, location: String, amount: String, date: Long, description: String) {
         log("Product Name")
         realm.write {
             this.copyToRealm((OrderEntity().apply {
@@ -21,6 +21,7 @@ class OrdersRepo(private val realm: Realm) {
                 this.location = location
                 this.amount = amount.stringToDouble()
                 this.description = description
+                this.date = date
             }))
         }
     }
